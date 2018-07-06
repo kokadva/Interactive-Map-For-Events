@@ -2,15 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
     <title>Open air map Demo</title>
 
     <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
-
     <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
-
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL,fetch"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
     <link rel="stylesheet" href="css/popupStyle.css" type="text/css">
+    <link rel="stylesheet" href="css/indexPageStyle.css" type="text/css">
+    <link rel="stylesheet" href="css/search.css" type="text/css">
 
     <script src="js/Constants.js"></script>
     <script src="js/Styling.js"></script>
@@ -18,20 +21,33 @@
     <script src="js/GeoLocation.js"></script>
     <script src="js/Routing.js"></script>
     <script src="js/PopupController.js"></script>
+    <script src="js/SearchController.js"></script>
+
 </head>
-<body style="margin: 0; padding: 0;">
+<body>
 
-    <!--Map container-->
-    <div id="map" class="map" style="position: absolute; height: 100%; width: 100%;"></div>
-
-    <!--PopUp-->
-    <div id="popup" class="ol-popup">
-        <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-        <div id="popup-content"></div>
+<!--Search bar-->
+<div class="search-outer">
+    <div class="search-container">
+        <input type="text" id="searchTextHolder" placeholder="Search.." name="search">
+        <button type="submit" onclick="mapController.search()"><i class="fa fa-search"></i></button>
     </div>
+</div>
 
-    <script src="js/MapController.js"></script>
-    <script> new MapController() </script>
+
+
+<!--Map container-->
+<div id="map" class="map"></div>
+
+<!--PopUp-->
+<div id="popup" class="ol-popup">
+    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+    <div id="popup-content"></div>
+</div>
+
+<!--Main controller init-->
+<script src="js/MapController.js"></script>
+<script> var mapController = new MapController();</script>
 
 </body>
 </html>
