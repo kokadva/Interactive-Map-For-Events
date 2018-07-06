@@ -8,7 +8,7 @@ class MapController {
         this.map = this.initMap();
         this.geolocationController = new GeoLocationController(this.map);
         this.router = new Router(this.map);
-        this.popupController = new PopupController(this.map, [this.layers[0]]);
+        this.popupController = new PopupController(this.map, [this.layers[1]]);
         this.routeUpdater()
     }
 
