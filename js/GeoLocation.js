@@ -1,3 +1,5 @@
+var myLocationCoordinates = null;
+
 var geolocation = new ol.Geolocation({
     projection: view.getProjection()
 });
@@ -27,7 +29,7 @@ geolocation.on('change:position', function() {
     var coordinates = geolocation.getPosition();
     positionFeature.setGeometry(coordinates ?
         new ol.geom.Point(coordinates) : null);
-    updateRouting(coordinates);
+    myLocationCoordinates = coordinates;
 });
 
 new ol.layer.Vector({
