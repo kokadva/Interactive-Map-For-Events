@@ -23,5 +23,4 @@ var map = new ol.Map({
     view: view
 });
 
-
-
+new GeoLocationController(map);
