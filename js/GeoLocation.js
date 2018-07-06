@@ -71,4 +71,8 @@ class GeoLocationController {
             })
         });
     }
+
+    getLocationCoordinates(){
+        return this.locationCoordinates;
+    }
 }

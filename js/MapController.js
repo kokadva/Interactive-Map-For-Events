@@ -23,4 +23,8 @@ var map = new ol.Map({
     view: view
 });
 
-new GeoLocationController(map);
+var geolocationController = new GeoLocationController(map);
+var router = new Router(map);
+
+setInterval(() => router.updateRoute(geolocationController.getLocationCoordinates()), 2000);
+
