@@ -1,4 +1,6 @@
+
 var routeFeature = new ol.Feature();
+
 routeFeature.setStyle(new ol.style.Style({
     stroke: new ol.style.Stroke({
         width: 7,
@@ -14,39 +16,47 @@ new ol.layer.Vector({
 });
 
 
-function getRequestUrl(coordinates) {
+function getRouteRequestUrlFrom(coordinates) {
     var lonlat = ol.proj.transform(coordinates, 'EPSG:3857', 'EPSG:4326');
     var lon = lonlat[0];
     var lat = lonlat[1];
-    return 'https://router.project-osrm.org/route/v1/driving/' + lon + ',' + lat + ';44.71210696825028,41.74745381492704?overview=false&alternatives=true&steps=true&hints=;';
+    var url = osrmRoutingRequestBaseUrl + '/route/v1/driving/' +
+        lon + ',' + lat + ';' +
+        '44.71210696825028,41.74745381492704?' +
+        'overview=full' +
+        '&alternatives=true' +
+        '&steps=true' +
+        '&hints=;';
+    return url;
 }
 
-function getCoordinatesFromServer(requestUrl) {
-    return decode('kws}Fm~hpGjApBp@Oj@jFmXvEy@dGad@re@rDv_AsFdW@nDsEeGg@Rs@xNd@`DaAj@uDkAZjM_FgIkAtBfA`Ta@NqAcFs@Ov@|BG|B}DdDqKf]yIjc@iCjWyGba@YjGt@vQgJ~NaO~p@', 5);
-}
-
-function formatCoordinates(coordinates) {
-    var result = [];
-    coordinates.forEach(function (c) {
-        result.push([c[1], c[0]]);
+function getGeometryFromResponse(json) {
+    var format = new ol.format.Polyline({
+        factor: 1e5
     });
-    return result;
+    var encoded_line = json.routes[0].geometry;
+    var line = format.readGeometry(encoded_line, {
+        dataProjection: 'EPSG:4326',
+        featureProjection: 'EPSG:3857'
+    });
+    return line;
 }
-function getRouteCoordinates(myLocation) {
-    // var requestUrl = getRequestUrl(myLocation);
-    var coordinates = getCoordinatesFromServer(null);
-    return formatCoordinates(coordinates);
+function updateRouting() {
+    if (myLocationCoordinates) {
+        const url = getRouteRequestUrlFrom(myLocationCoordinates);
+        const request = async () => {
+            const response = await fetch(url);
+            if (response.status !== 200)
+                return;
+            const json = await response.json();
+            const geometry = getGeometryFromResponse(json);
+            routeFeature.setGeometry(geometry ?
+                geometry : null);
+
+        };
+        request();
+    }
 }
 
-function updateRoute(routeCoordinates) {
-    var trnsStr = new ol.geom.LineString(routeCoordinates);
-    trnsStr.transform('EPSG:4326', 'EPSG:3857');
-    routeFeature.setGeometry(routeCoordinates ?
-        trnsStr : null);
-}
 
-function updateRouting(myLocation) {
-    var routeCoordinates = getRouteCoordinates(myLocation);
-    updateRoute(routeCoordinates);
-}
-
+setInterval(updateRouting, 2000);
