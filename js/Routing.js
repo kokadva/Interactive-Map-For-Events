@@ -44,4 +44,3 @@ function updateRouting(myLocation) {
     updateRoute(routeCoordinates);
 }
 
-updateRouting(null);
