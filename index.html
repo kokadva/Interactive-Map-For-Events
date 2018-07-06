@@ -11,8 +11,10 @@
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL,fetch"></script>
 
     <link rel="stylesheet" href="css/popupStyle.css" type="text/css">
-
+    <link rel="stylesheet" href="css/search.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="js/Constants.js"></script>
+    <script src="js/search.js"></script>
     <script src="js/Styling.js"></script>
     <script src="js/WFSLayerUtils.js"></script>
     <script src="js/GeoLocation.js"></script>
@@ -21,17 +23,29 @@
 </head>
 <body style="margin: 0; padding: 0;">
 
-    <!--Map container-->
-    <div id="map" class="map" style="position: absolute; height: 100%; width: 100%;"></div>
 
-    <!--PopUp-->
-    <div id="popup" class="ol-popup">
-        <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-        <div id="popup-content"></div>
+<div class="search-outer">
+    <div class="search-container">
+        <form action="/action_page.php">
+            <input type="text" placeholder="Search.." name="search">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
     </div>
+</div>
 
-    <script src="js/MapController.js"></script>
-    <script> new MapController() </script>
+
+
+<!--Map container-->
+<div id="map" class="map" style="position: absolute; height: 100%; width: 100%;"></div>
+
+<!--PopUp-->
+<div id="popup" class="ol-popup">
+    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+    <div id="popup-content"></div>
+</div>
+
+<script src="js/MapController.js"></script>
+<script> new MapController() </script>
 
 </body>
 </html>
