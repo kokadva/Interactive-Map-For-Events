@@ -1,40 +1,78 @@
-var myLocationCoordinates = null;
 
-var geolocation = new ol.Geolocation({
-    projection: view.getProjection()
-});
+class GeoLocationController {
 
-geolocation.setTracking(true);
+    constructor(map) {
+        this.map = map;
+        this.locationCoordinates = null;
 
-var accuracyFeature = new ol.Feature();
-    geolocation.on('change:accuracyGeometry', function() {
-    accuracyFeature.setGeometry(geolocation.getAccuracyGeometry());
-});
+        this.locationFeature = this.initLocationFeature();
+        this.accuracyFeature = this.initAccuracyFeature();
 
-var positionFeature = new ol.Feature();
-positionFeature.setStyle(new ol.style.Style({
-    image: new ol.style.Circle({
-        radius: 6,
-        fill: new ol.style.Fill({
-            color: '#3399CC'
-        }),
-        stroke: new ol.style.Stroke({
-            color: '#fff',
-            width: 2
-        })
-    })
-}));
+        this.locationVectorLayer = this.initLocationVectorLayer();
 
-geolocation.on('change:position', function() {
-    var coordinates = geolocation.getPosition();
-    positionFeature.setGeometry(coordinates ?
-        new ol.geom.Point(coordinates) : null);
-    myLocationCoordinates = coordinates;
-});
+        this.geolocation = this.initGeoLocation();
+        this.initAccuracyFeatureOnChangeListener();
 
-new ol.layer.Vector({
-    map: map,
-    source: new ol.source.Vector({
-        features: [accuracyFeature, positionFeature]
-    })
-});
+
+
+    }
+
+    initLocationFeature() {
+        var locationFeature = new ol.Feature();
+        locationFeature.setStyle(new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 6,
+                fill: new ol.style.Fill({
+                    color: '#3399CC'
+                }),
+                stroke: new ol.style.Stroke({
+                    color: '#fff',
+                    width: 2
+                })
+            })
+        }));
+        return locationFeature;
+    }
+
+    initAccuracyFeature() {
+        return new ol.Feature();
+    }
+
+    initGeoLocation() {
+        var geolocation = new ol.Geolocation({
+            projection: this.map.getView().getProjection()
+        });
+        geolocation.setTracking(true);
+
+        var self = this;
+        geolocation.on('change:position', function () {
+            var coordinates = geolocation.getPosition();
+            self.locationFeature.setGeometry(coordinates ?
+                new ol.geom.Point(coordinates) : null);
+            self.locationCoordinates = coordinates;
+            self.locationCoordinates = coordinates;
+        });
+
+        return geolocation;
+    }
+
+    initAccuracyFeatureOnChangeListener() {
+        var self = this;
+        this.geolocation.on('change:accuracyGeometry', function () {
+            self.accuracyFeature.setGeometry(self.geolocation.getAccuracyGeometry());
+        });
+    }
+
+    initLocationVectorLayer() {
+        return new ol.layer.Vector({
+            map: this.map,
+            source: new ol.source.Vector({
+                features: [this.accuracyFeature, this.locationFeature]
+            })
+        });
+    }
+
+    getLocationCoordinates(){
+        return this.locationCoordinates;
+    }
+}
