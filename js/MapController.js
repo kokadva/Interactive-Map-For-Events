@@ -1,15 +1,28 @@
 
+// View initi
+var view = new ol.View({
+    center: [4977328.98, 5123224.22],
+    zoom: 18,
+    minZoom: 16,
+    maxZoom: 18
+});
+
+// Layers init
+var openairObjectsLayer = getVectorLayerFrom(baseUrl + 'result.json');
+var defaultOSMLayer = new ol.layer.Tile({
+    source: new ol.source.OSM()
+});
+
+// Map init
 var map = new ol.Map({
     layers: [
-        new ol.layer.Tile({
-            source: new ol.source.OSM()
-        })
+        defaultOSMLayer,
+        openairObjectsLayer
     ],
+
     target: 'map',
-    view: new ol.View({
-        center: [4977328.98, 5123224.22],
-        zoom: 18,
-        minZoom: 16,
-        maxZoom: 18
-    })
+    view: view
 });
+
+
+
