@@ -43,7 +43,7 @@ class MapController {
         setInterval(() => {
                 if (self.geolocationController.getLocationCoordinates())
                     self.router.updateRoute(self.geolocationController.getLocationCoordinates())
-            }, 2000
+            }, 1000
         );
     }
 
