@@ -8,7 +8,7 @@ var view = new ol.View({
 });
 
 // Layers init
-var openairObjectsLayer = getVectorLayerFrom(baseUrl + 'result.json');
+var openairObjectsLayer = getVectorLayerFrom(baseUrl + 'result.json', objectsStyleFunc);
 var defaultOSMLayer = new ol.layer.Tile({
     source: new ol.source.OSM()
 });
