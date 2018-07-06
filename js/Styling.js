@@ -1,29 +1,3 @@
-var backgroundGrassStyle = new ol.style.Style({
-    fill: new ol.style.Fill({
-        color: 'rgb(195, 223, 134)'
-    })
-});
-
-var roadStyle = new ol.style.Style({
-    fill: new ol.style.Fill({
-        color: 'rgb(214, 214, 194)'
-    }),
-    stroke: new ol.style.Stroke({
-        color: '#9EA6A8',
-        width: 3
-    })
-});
-
-var boundaryStyle = new ol.style.Style({
-    fill: new ol.style.Fill({
-        color: 'rgb(195, 223, 134)'
-    }),
-    stroke: new ol.style.Stroke({
-        color: 'rgb(108, 141, 37)',
-        width: 3
-    })
-});
-
 function getTextPolygonFeatureStyle(feature) {
 
     var properties = feature.getProperties();
@@ -73,12 +47,36 @@ var objectsStyleFunc = function (feature, extentInfo) {
 
         case 'icon':
             return getIconFeatureStyle(feature);
+
         case 'grass':
-            return backgroundGrassStyle;
+            return new ol.style.Style({
+                fill: new ol.style.Fill({
+                    color: 'rgb(195, 223, 134)'
+                })
+            });
+
         case 'road':
-            return roadStyle;
+            return new ol.style.Style({
+                fill: new ol.style.Fill({
+                    color: 'rgb(214, 214, 194)'
+                }),
+                stroke: new ol.style.Stroke({
+                    color: '#9EA6A8',
+                    width: 3
+                })
+            });
+
         case 'boundary':
-            return boundaryStyle;
+            return new ol.style.Style({
+                fill: new ol.style.Fill({
+                    color: 'rgb(195, 223, 134)'
+                }),
+                stroke: new ol.style.Stroke({
+                    color: 'rgb(108, 141, 37)',
+                    width: 3
+                })
+            });
+
         case 'other_polygon':
             return getTextPolygonFeatureStyle(feature);
     }
