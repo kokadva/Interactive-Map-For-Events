@@ -7,8 +7,8 @@ class PopupController {
         this.container = document.getElementById('popup');
         this.content = document.getElementById('popup-content');
         this.closer = document.getElementById('popup-closer');
-        this.overlay = this.initOverlay()
-        this.initCloser()
+        this.overlay = this.initOverlay();
+        this.initCloser();
         this.clickCoordinates = null;
         this.initClickCoordinatesOnChangeListener();
         this.selectInteraction = this.initSelectInteraction()
@@ -27,9 +27,10 @@ class PopupController {
     }
 
     initCloser() {
+        var self = this;
         this.closer.onclick = function () {
-            this.overlay.setPosition(undefined);
-            this.closer.blur();
+            self.overlay.setPosition(undefined);
+            self.closer.blur();
             return false;
         };
     }
