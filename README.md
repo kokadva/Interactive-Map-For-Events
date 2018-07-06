@@ -21,3 +21,6 @@ Development visualisation
 
 6. Routing
 ![Routing.png](screenshots/6.Routing.png "6.Routing.png")
+
+7. Popup window.png
+![7.Popup_Window.png](screenshots/7.Popup_Window.png "7.Popup_Window.png")
