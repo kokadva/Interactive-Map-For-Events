@@ -25,6 +25,11 @@ var map = new ol.Map({
 
 var geolocationController = new GeoLocationController(map);
 var router = new Router(map);
+var popupController = new PopupController(map, [openairObjectsLayer]);
 
-setInterval(() => router.updateRoute(geolocationController.getLocationCoordinates()), 2000);
+setInterval(() => {
+    if (geolocationController.getLocationCoordinates())
+        router.updateRoute(geolocationController.getLocationCoordinates())
+    }, 2000
+);
 
