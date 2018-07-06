@@ -19,7 +19,6 @@ var map = new ol.Map({
         defaultOSMLayer,
         openairObjectsLayer
     ],
-
     target: 'map',
     view: view
 });
