@@ -9,3 +9,4 @@ Development visualisation
 ![3.After_icons_addition.png](screenshots/3.After_icons_addition.png "3.After_icons_addition.png")
 ![4.After_background_grass_styling.png](screenshots/4.After_background_grass_styling.png "4.After_background_grass_styling.png")
 ![5.After_road_and_boundary_styling.png](screenshots/5.After_road_and_boundary_styling.png "5.After_road_and_boundary_styling.png")
+![6.Routing.png](screenshots/6.Routing.png "6.Routing.png")

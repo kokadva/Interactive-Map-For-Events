@@ -27,6 +27,7 @@ geolocation.on('change:position', function() {
     var coordinates = geolocation.getPosition();
     positionFeature.setGeometry(coordinates ?
         new ol.geom.Point(coordinates) : null);
+    updateRouting(coordinates);
 });
 
 new ol.layer.Vector({
