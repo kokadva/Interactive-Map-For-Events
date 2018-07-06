@@ -40,7 +40,7 @@ class GeoLocationController {
 
     initGeoLocation() {
         var geolocation = new ol.Geolocation({
-            projection: view.getProjection()
+            projection: this.map.getView().getProjection()
         });
         geolocation.setTracking(true);
 

@@ -1,5 +1,4 @@
 
-
 class Router {
 
     constructor(map){
