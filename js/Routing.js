@@ -1,6 +1,12 @@
 var routeFeature = new ol.Feature();
+routeFeature.setStyle(new ol.style.Style({
+    stroke: new ol.style.Stroke({
+        width: 7,
+        color: [51, 136, 255, 1]
+    })
+}));
 
-var routinglayer = new ol.layer.Vector({
+new ol.layer.Vector({
     map: map,
     source: new ol.source.Vector({
         features: [routeFeature]
