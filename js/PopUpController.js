@@ -11,21 +11,32 @@ var overlay = new ol.Overlay({
     }
 });
 
-
 closer.onclick = function() {
     overlay.setPosition(undefined);
     closer.blur();
     return false;
 };
 
+map.addOverlay(overlay);
+
+var clickCoordinates = null;
 
 map.on('singleclick', function(evt) {
-    const coordinate = evt.coordinate;
-    const hdms = ol.coordinate.toStringHDMS(ol.proj.toLonLat(coordinate));
-
-    content.innerHTML = '<p>You clicked here:</p><code>' + hdms +
-        '</code>';
-    overlay.setPosition(coordinate);
+    clickCoordinates = evt.coordinate;
 });
 
-map.addOverlay(overlay);
+
+var selectInteraction = new ol.interaction.Select({
+    wrapX: false,
+    layers: [
+        openairObjectsLayer
+    ]
+});
+
+selectInteraction.on('select', function (e) {
+    content.innerHTML = '<p>' + e.selected[0].getProperties()['type'] + '</p>';
+    overlay.setPosition(clickCoordinates);
+    selectInteraction.getFeatures().clear();
+});
+
+map.addInteraction(selectInteraction);
