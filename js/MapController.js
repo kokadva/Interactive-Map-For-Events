@@ -9,6 +9,7 @@ class MapController {
         this.geolocationController = new GeoLocationController(this.map);
         this.router = new Router(this.map);
         this.popupController = new PopupController(this.map, this.layers[1]);
+        this.searchController = new SearchController(this.map, this.layers[1]);
         this.routeUpdater()
     }
 
@@ -44,6 +45,11 @@ class MapController {
                     self.router.updateRoute(self.geolocationController.getLocationCoordinates())
             }, 2000
         );
+    }
+
+    search() {
+        var searchText = document.getElementById('searchTextHolder').value;
+        this.searchController.search(searchText);
     }
 }
 

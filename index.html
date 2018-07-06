@@ -14,22 +14,20 @@
     <link rel="stylesheet" href="css/search.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="js/Constants.js"></script>
-    <script src="js/search.js"></script>
     <script src="js/Styling.js"></script>
     <script src="js/WFSLayerUtils.js"></script>
     <script src="js/GeoLocation.js"></script>
     <script src="js/Routing.js"></script>
     <script src="js/PopupController.js"></script>
+    <script src="js/SearchController.js"></script>
 </head>
 <body style="margin: 0; padding: 0;">
 
 
 <div class="search-outer">
     <div class="search-container">
-        <form action="/action_page.php">
-            <input type="text" placeholder="Search.." name="search">
-            <button type="submit"><i class="fa fa-search"></i></button>
-        </form>
+        <input type="text" id="searchTextHolder" placeholder="Search.." name="search">
+        <button type="submit" onclick="mapController.search()"><i class="fa fa-search"></i></button>
     </div>
 </div>
 
@@ -45,7 +43,7 @@
 </div>
 
 <script src="js/MapController.js"></script>
-<script> new MapController() </script>
+<script> var mapController = new MapController();</script>
 
 </body>
 </html>
