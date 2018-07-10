@@ -1,6 +1,6 @@
-# js-final
+# Interactive map of Tbilisi OpenAir 2018
 
-Interactive map of Tbilisi OpenAir 2018
+Demo project
 
 Development visualisation
 
