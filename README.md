@@ -1,8 +1,8 @@
 # Interactive map of Tbilisi OpenAir 2018
 
-Demo project
+A project can be used to visualize objects on the map, there is GPS and a OSRM built in too which will provide routing, but it's linked to the OSRM's demo API so in case of not demo usage, you should swith to your own service
 
-Development visualisation
+#### Development visualisation:
 
 1. Default OSM view
 ![Default osm view](screenshots/1.Default_OSM_view.png "Default osm view")
@@ -27,3 +27,12 @@ Development visualisation
 
 8. Search bar
 ![8.Search_bar.png](screenshots/8.Search_bar.png "8.Search_bar.png")
+
+
+#### Technologies used:
+1. Native JS/Open Layers 4
+2. OSRM (Open Source Routing Machine)
+
+
+Author: Konstantine Dvalishvili </br>
+Email: konstantine.dvalishvil@gmail.com
